@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using YnovShop.Business;
 using YnovShop.Data;
+using YnovShop.Data.Entities;
 using YnovShop.Provider;
 
 namespace YnovShop
@@ -31,7 +32,6 @@ namespace YnovShop
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ISaltProvider, SaltProvider>();
             services.AddTransient<IPasswordProvider, PasswordProvider>();
-            services.AddDbContext<UserContext>(options => options.UseSqlite("Data Source=Users.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
