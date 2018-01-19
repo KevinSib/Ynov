@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YnovShop.Business;
+using YnovShop.Data;
 using YnovShop.Models;
 
 namespace YnovShop.Controllers
@@ -10,12 +12,14 @@ namespace YnovShop.Controllers
         #region Variables
 
         private IUserService _userService;
+        private IUserRepository _userRepository;
 
         #endregion
 
-        public AccountController(IUserService userService)
+        public AccountController(IUserService userService, IUserRepository userRepository)
         {
             this._userService = userService;
+            this._userRepository = userRepository;
         }
 
         // GET: Account
@@ -45,6 +49,21 @@ namespace YnovShop.Controllers
             {
                 return View();
             }
+        }
+
+        // GET: Users/Details/5
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var user = this._userRepository.GetById((int) id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
         }
     }
 }
