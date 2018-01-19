@@ -4,8 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using YnovShop.Business;
+using YnovShop.Data;
+using YnovShop.Provider;
 
 namespace YnovShop
 {
@@ -22,6 +26,12 @@ namespace YnovShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<ISaltProvider, SaltProvider>();
+            services.AddTransient<IPasswordProvider, PasswordProvider>();
+            services.AddDbContext<UserContext>(options => options.UseSqlite("Data Source=Users.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

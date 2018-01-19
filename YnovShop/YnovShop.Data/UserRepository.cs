@@ -1,4 +1,5 @@
-﻿using YnovShop.Data.Entities;
+﻿using System.Linq;
+using YnovShop.Data.Entities;
 
 namespace YnovShop.Data
 {
@@ -6,6 +7,11 @@ namespace YnovShop.Data
     {
         public UserRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
+        }
+
+        public YUser GetById(int id)
+        {
+            return this.Get(u => u.Id == id, null, 0, 1).Single();
         }
     }
 }
