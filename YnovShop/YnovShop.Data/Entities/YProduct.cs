@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace YnovShop.Data.Entities
 {
-    class YProduct
+    public partial class YProduct
     {
+        public YProduct()
+        {
+            YProductPurchase = new HashSet<YProductPurchase>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Stock { get; set; }
-        public decimal Price { get; set; }
-        public DateTime ReplenishmentDate { get; set; }
-        }
+        public string Descritption { get; set; }
+        public int? Stock { get; set; }
+        public double? Price { get; set; }
+        public DateTime? ReplenishmentDate { get; set; }
+
+        public ICollection<YProductPurchase> YProductPurchase { get; set; }
+    }
 }

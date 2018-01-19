@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace YnovShop.Data.Entities
 {
-    class YProductPurchase
+    public partial class YProductPurchase
     {
-        public YUser YUser { get; set; }
-        public YProduct YProduct { get; set; }
-        public DateTime PurchaseDate { get; set; }
-    }
+        public int IdYuser { get; set; }
+        public int IdYproduct { get; set; }
+        public DateTime? PurchaseDate { get; set; }
 
+        public YProduct IdYproductNavigation { get; set; }
+        public YUser IdYuserNavigation { get; set; }
+    }
 }

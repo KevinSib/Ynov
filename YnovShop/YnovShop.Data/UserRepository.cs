@@ -14,4 +14,6 @@ namespace YnovShop.Data
             return this.Get(u => u.Id == id, null, 0, 1).Single();
         }
     }
+
+
 }

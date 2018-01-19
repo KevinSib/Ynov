@@ -20,14 +20,14 @@ CREATE TABLE Y_Product
 (
     id INT NOT NULL IDENTITY(1,1),
     name VARCHAR(100),
-    descritpion VARCHAR(255),
+    descritption VARCHAR(255),
     stock INT,
     price FLOAT,
     replenishmentDate DateTime,
     CONSTRAINT PK_product PRIMARY KEY (id)
 );
 
- CREATE TABLE Y_User(
+	 CREATE TABLE Y_User(
     id INT NOT NULL IDENTITY(1,1),
     firstname VARCHAR(100),
     lastname VARCHAR(100),
