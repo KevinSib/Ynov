@@ -16,8 +16,7 @@ namespace YnovShop.Data.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Server=nsb.heavydev.fr;Database=YnovShop;User ID=sa;Password=ynov2018ks");
+                optionsBuilder.UseSqlServer(@"Data Source = nsb.heavydev.fr; Initial Catalog = YnovShop; Persist Security Info=True;User ID = sa;Password=ynov2018ks;");
             }
         }
 
