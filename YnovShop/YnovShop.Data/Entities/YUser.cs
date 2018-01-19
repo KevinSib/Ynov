@@ -13,5 +13,7 @@ namespace YnovShop.Data.Entities
         public string Salt { get; set; }
         public DateTime Registration { get; set; }
         public bool IsEnable { get; set; }
+        public YAddress YAddress { get; set; }
+        public IList<YPhone> YPhones { get; set; }
     }
 }
