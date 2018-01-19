@@ -14,6 +14,6 @@ namespace YnovShop.Data.Entities
         public DateTime Registration { get; set; }
         public bool IsEnable { get; set; }
         public YAddress YAddress { get; set; }
-        public IList<YPhone> YPhones { get; set; }
+        public YPhone YPhone { get; set; }
     }
 }
