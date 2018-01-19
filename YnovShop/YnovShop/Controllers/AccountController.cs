@@ -25,7 +25,8 @@ namespace YnovShop.Controllers
         // GET: Account
         public ActionResult Index()
         {
-            return View();
+            var users = this._userRepository.Get();
+            return View(users);
         }
 
         // GET: Account/Register
