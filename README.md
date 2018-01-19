@@ -1,5 +1,5 @@
 # Ynov
-TP
+Site E-Commerce de l'équipe Dominique PHAN, Victor DUCHENET et Kévin SIBUE
 
 ## Commandes
 
