@@ -3,13 +3,32 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using YnovShop.Business;
 using YnovShop.Models;
 
 namespace YnovShop.Controllers
 {
     public class HomeController : Controller
     {
+        #region Variables
+
+
+
+        #endregion
+
+        #region Constructor
+
+        public HomeController()
+        {
+            
+        }
+
+        #endregion
+
+        #region Routes / Actions
+
         public IActionResult Index()
         {
             return View();
@@ -33,5 +52,7 @@ namespace YnovShop.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        #endregion
     }
 }
