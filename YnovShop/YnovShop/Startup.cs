@@ -26,10 +26,10 @@ namespace YnovShop
             services.AddMvc();
 
             services.AddIdentity<YUser, IdentityRole>()
-            .AddEntityFrameworkStores<YnovShopContext>()
+                    .AddEntityFrameworkStores<YnovShopContext>()
                     .AddDefaultTokenProviders();
 
-            services.Configure<IdentityOptions>(options =>
+            /*services.Configure<IdentityOptions>(options =>
             {
                 // Password settings
                 options.Password.RequireDigit = true;
@@ -57,7 +57,7 @@ namespace YnovShop
                 options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout
                 options.AccessDeniedPath = "/Account/AccessDenied"; // If the AccessDeniedPath is not set here, ASP.NET Core will default to /Account/AccessDenied
                 options.SlidingExpiration = true;
-            });
+            });*/
 
             services.AddTransient<ISignManager, SignManager>();
             services.AddTransient<IUserRepository, UserRepository>();

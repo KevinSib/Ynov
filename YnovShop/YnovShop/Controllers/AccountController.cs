@@ -74,7 +74,7 @@ namespace YnovShop.Controllers
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await this._signManager.SignInAsync(model.Email, model.Password);
-                if (result.Succeeded)
+                /*if (result.Succeeded)
                 {
                     return RedirectToLocal(returnUrl);
                 }
@@ -86,7 +86,7 @@ namespace YnovShop.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return View(model);
-                }
+                }*/
             }
 
             // If we got this far, something failed, redisplay form
@@ -97,11 +97,12 @@ namespace YnovShop.Controllers
         // POST: /Account/LogOut
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public Task<IActionResult> LogOut()
+        public async Task<IActionResult> LogOut()
         {
-            await _signInManager.SignOutAsync();
-
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            await Task.Run(() => {});
+            //await _signInManager.SignOutAsync();
+            return View();
+            //return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         // GET: Users/Details/5
