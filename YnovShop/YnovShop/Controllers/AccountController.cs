@@ -47,6 +47,12 @@ namespace YnovShop.Controllers
             return View();
         }
 
+        // GET: Account/Register
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         // POST: Account/Create
         [HttpPost]
         public ActionResult Register(RegisterModel model)
@@ -65,6 +71,7 @@ namespace YnovShop.Controllers
 
         //
         // POST: /Account/Login
+        [HttpPost]
         public async Task<IActionResult> Login(LoginModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -94,9 +101,8 @@ namespace YnovShop.Controllers
             return View(model);
         }
 
-        [HttpPost]
         [Authorize]
-        public async Task<IActionResult> LogOutAsync()
+        public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
 

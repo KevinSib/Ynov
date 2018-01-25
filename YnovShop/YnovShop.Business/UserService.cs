@@ -65,14 +65,13 @@ namespace YnovShop.Business
             string userSalt = currentUser.Salt;
             string userPassword = currentUser.PasswordHash;
 
-            byte[] hashPassword = this._passwordProvider.PasswordHash(password, Encoding.UTF8.GetBytes(userSalt));
-
-            if (!Convert.ToBase64String(hashPassword).Equals(userPassword))
+            bool isValidate = this._passwordProvider.Validate(password, Convert.FromBase64String(userSalt), Convert.FromBase64String(userPassword));
+            if (isValidate)
             {
-                return LoginResult.Failed;
+                return LoginResult.Success;
             }
 
-            return LoginResult.Success;
+            return LoginResult.Failed;
         }
     }
 }
