@@ -63,16 +63,11 @@ namespace YnovShop.Controllers
 
         //
         // POST: /Account/Login
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await this._signManager.SignInAsync(model.Email, model.Password);
                 /*if (result.Succeeded)
                 {
@@ -88,8 +83,6 @@ namespace YnovShop.Controllers
                     return View(model);
                 }*/
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -99,10 +92,8 @@ namespace YnovShop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOut()
         {
-            await Task.Run(() => {});
-            //await _signInManager.SignOutAsync();
+            await this._signManager.SignOutAsync();
             return View();
-            //return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         // GET: Users/Details/5

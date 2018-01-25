@@ -4,18 +4,18 @@ using Microsoft.AspNetCore.Identity;
 
 namespace YnovShop.Data.Entities
 {
-    public partial class YUser : IdentityUser
+    public partial class YUser
     {
         public YUser()
         {
             YProductPurchase = new HashSet<YProductPurchase>();
         }
 
-        //public int Id { get; set; }
+        public int Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        //public string Email { get; set; }
-        //public string PasswordHash { get; set; }
+        public string Email { get; set; }
+        public string PasswordHash { get; set; }
         public string Salt { get; set; }
         public DateTime? Registration { get; set; }
         public bool? IsEnable { get; set; }

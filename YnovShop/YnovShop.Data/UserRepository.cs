@@ -11,7 +11,7 @@ namespace YnovShop.Data
 
         public YUser GetById(int id)
         {
-            return this.Get(u => u.Id == id.ToString(), null, 0, 1).Single();
+            return this.Get(u => u.Id == id, null, 0, 1).Single();
         }
 
         public YUser GetByEmail(string email)
