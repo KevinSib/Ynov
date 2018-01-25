@@ -6,6 +6,12 @@
 <h2>Produits</h2>
 <ul>
     @foreach (var product in Model) {
-        <li>product.Nom</li>
+        <li>@product.Name  -  @product.Price €
+            <ul>
+                <li>@product.Descritption</li>
+                <li> il reste @product.Stock produits</li>
+            </ul>
+        </li>
+        
     }
 </ul>
