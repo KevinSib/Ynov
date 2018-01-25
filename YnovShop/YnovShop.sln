@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YnovShop.Data", "YnovShop.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YnovShop.Provider", "YnovShop.Provider\YnovShop.Provider.csproj", "{20A69697-7C4E-4822-AB9E-AE0D53EB630F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YnovShopTest", "YnovShopTest\YnovShopTest.csproj", "{2F0BA04B-1DB9-4535-B814-03C1C48B92D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{20A69697-7C4E-4822-AB9E-AE0D53EB630F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20A69697-7C4E-4822-AB9E-AE0D53EB630F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20A69697-7C4E-4822-AB9E-AE0D53EB630F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F0BA04B-1DB9-4535-B814-03C1C48B92D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F0BA04B-1DB9-4535-B814-03C1C48B92D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F0BA04B-1DB9-4535-B814-03C1C48B92D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F0BA04B-1DB9-4535-B814-03C1C48B92D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

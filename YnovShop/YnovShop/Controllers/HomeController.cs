@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using YnovShop.Business;
 using YnovShop.Models;
+using YnovShop.Provider;
 
 namespace YnovShop.Controllers
 {
@@ -36,6 +37,10 @@ namespace YnovShop.Controllers
 
         public IActionResult About()
         {
+            var salt = new SaltProvider().GetSalt();
+            var passwordHash = new PasswordProvider().PasswordHash("azerty", salt);
+            ViewData["Salt"] = Convert.ToBase64String(salt);
+            ViewData["PasswordHash"] = Convert.ToBase64String(passwordHash);
             ViewData["Message"] = "Your application description page.";
 
             return View();
