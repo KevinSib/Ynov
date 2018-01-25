@@ -4,7 +4,6 @@ using YnovShop.Provider;
 namespace YnovShopTest
 {
 
-
     [TestClass]
     public class SaltProviderShould
     {
@@ -14,14 +13,6 @@ namespace YnovShopTest
         private string aPasswordHash = "V3/Odkzqnu1CGjxPDEK3bEsE2nQJuQhP";
 
         private ISaltProvider _saltProvider;
-
-
-        public SaltProviderShould()
-        {
-            //_salt = new Mock<ISaltProvider>();
-            this._salt = new Mock<ISaltProvider>(MockBehavior.Strict);
-            //this._salt.Setup(s => s.GetSalt());
-        }
 
         [TestInitialize]
         public void Init()
@@ -39,6 +30,13 @@ namespace YnovShopTest
 
         }
 
+        
+       /* public SaltProviderShould()
+        {
+            //_salt = new Mock<ISaltProvider>();
+            this._salt = new Mock<ISaltProvider>(MockBehavior.Strict);
+            //this._salt.Setup(s => s.GetSalt());
+        }*/
 
     }
 }
