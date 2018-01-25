@@ -1,4 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,17 +18,15 @@ namespace YnovShop.Controllers
 
         private readonly IUserService _userService;
         private readonly IUserRepository _userRepository;
-        private readonly ISignManager _signManager;
 
         #endregion
 
         #region Constructors
 
-        public AccountController(IUserService userService, IUserRepository userRepository, ISignManager signManager)
+        public AccountController(IUserService userService, IUserRepository userRepository)
         {
             this._userService = userService;
             this._userRepository = userRepository;
-            this._signManager = signManager;
         }
 
         #endregion
@@ -46,7 +48,6 @@ namespace YnovShop.Controllers
 
         // POST: Account/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
             try
@@ -55,7 +56,7 @@ namespace YnovShop.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
@@ -68,31 +69,36 @@ namespace YnovShop.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var result = await this._signManager.SignInAsync(model.Email, model.Password);
-                /*if (result.Succeeded)
+                LoginResult loginResult = this._userService.LoginUser(model.Email, model.Password);
+                if (loginResult == LoginResult.Success)
                 {
-                    return RedirectToLocal(returnUrl);
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, model.Email)
+                    };
+
+                    var userIdentity = new ClaimsIdentity(claims, "login");
+
+                    ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+
+                    await HttpContext.SignInAsync(principal);
+
+                    return Redirect("/");
                 }
-                if (result.IsLockedOut)
+                else 
                 {
-                    return View("Lockout");
+                    ViewData["ERROR"] = "Can't connect user !!!";
                 }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
-                }*/
             }
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOut
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogOut()
+        [Authorize]
+        public async Task<IActionResult> LogOutAsync()
         {
-            await this._signManager.SignOutAsync();
+            await HttpContext.SignOutAsync();
+
             return View();
         }
 

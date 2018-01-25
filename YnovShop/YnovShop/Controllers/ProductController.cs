@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using YnovShop.Data;
 
@@ -29,6 +30,7 @@ namespace YnovShop.Controllers
         #region Routes / Methods
 
         // GET: /<controller>/
+        [Authorize]
         public IActionResult Index()
         {
             var products = this._productRepository.Get();
@@ -36,6 +38,7 @@ namespace YnovShop.Controllers
         }
 
         // GET: Products/Details/5
+        [Authorize]
         public IActionResult Details(int? id)
         {
             if (id == null)

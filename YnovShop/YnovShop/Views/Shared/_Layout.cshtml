@@ -31,8 +31,22 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Accueil</a></li>
-                    <li><a asp-area="" asp-controller="Account" asp-action="Index">Mon compte</a></li>
-                    <li><a asp-area="" asp-controller="Product" asp-action="Index">Nos produits</a></li>
+                    @if (User.Identity.IsAuthenticated) 
+                    { 
+                        <li><a asp-area="" asp-controller="Account" asp-action="Index">Mon compte</a></li>
+                        <li><a asp-area="" asp-controller="Product" asp-action="Index">Nos produits</a></li>
+                        <li>
+                            <form method="post">
+                                <input type="submit" value="Déconnexion" />
+                                @Html.AntiForgeryToken()
+                            </form>
+                        </li>
+                    }
+                    else 
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="Login">Se connecter</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Register">S'enregistrer</a></li>
+                    }
                     <li><a asp-area="" asp-controller="Home" asp-action="About">A Propos</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

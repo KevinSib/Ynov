@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using YnovShop.Data;
 using YnovShop.Data.Entities;
 using YnovShop.Provider;
@@ -40,6 +43,33 @@ namespace YnovShop.Business
             };
 
             _userRepository.Insert(user);
+        }
+
+        public LoginResult LoginUser(string email, string password)
+        {
+            if (string.IsNullOrEmpty(email))
+                throw new ArgumentNullException(nameof(email));
+
+            if (string.IsNullOrEmpty(password))
+                throw new ArgumentNullException(nameof(password));
+
+            YUser currentUser = this._userRepository.GetByEmail(email);
+            if (currentUser == null)
+            {
+                return LoginResult.NotExists;
+            }
+
+            string userSalt = currentUser.Salt;
+            string userPassword = currentUser.PasswordHash;
+
+            byte[] hashPassword = this._passwordProvider.PasswordHash(password, Encoding.UTF8.GetBytes(userSalt));
+
+            if (!Convert.ToBase64String(hashPassword).Equals(userPassword))
+            {
+                return LoginResult.Failed;
+            }
+
+            return LoginResult.Success;
         }
     }
 }
