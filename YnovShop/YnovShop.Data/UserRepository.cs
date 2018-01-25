@@ -11,7 +11,17 @@ namespace YnovShop.Data
 
         public YUser GetById(int id)
         {
-            return this.Get(u => u.Id == id, null, 0, 1).Single();
+            return this.Get(u => u.Id == id.ToString(), null, 0, 1).Single();
+        }
+
+        public YUser GetByEmail(string email)
+        {
+            return this.Get(u => u.Email == email, null, 0, 1).Single();
+        }
+
+        public bool Exists(int id)
+        {
+            return GetById(id) != null;
         }
     }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Identity;
 
 namespace YnovShop.Data.Entities
 {
@@ -11,8 +11,11 @@ namespace YnovShop.Data.Entities
             YProductPurchase = new HashSet<YProductPurchase>();
         }
 
+        //public int Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
+        //public string Email { get; set; }
+        //public string PasswordHash { get; set; }
         public string Salt { get; set; }
         public DateTime? Registration { get; set; }
         public bool? IsEnable { get; set; }

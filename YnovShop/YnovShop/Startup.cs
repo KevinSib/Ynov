@@ -60,6 +60,7 @@ namespace YnovShop
             });*/
 
             services.AddTransient<ISignManager, SignManager>();
+            services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
