@@ -19,17 +19,17 @@ namespace YnovShop.Data
 
         public IList<YProductPurchase> GetBasketForUser(YUser user)
         {
-            return this.Get(u => u.IdYuser == user.Id, null, 0, 1).ToList();
+            return this.Get(u => u.IdYuser == user.Id, null, 0, null).ToList();
         }
 
         public IList<YProductPurchase> GetActiveBasketForUser(YUser user)
         {
-            return this.Get(b => b.IdYuser == user.Id && b.PurchaseDate == null, null, 0, 1).ToList();
+            return this.Get(b => b.IdYuser == user.Id && b.PurchaseDate == null, null, 0, null).ToList();
         }
 
         public IList<YProductPurchase> GetInactiveForUser(YUser user)
         {
-            return this.Get(b => b.IdYuser == user.Id && b.PurchaseDate != null, null, 0, 1).ToList();
+            return this.Get(b => b.IdYuser == user.Id && b.PurchaseDate != null, null, 0, null).ToList();
         }
     }
 }

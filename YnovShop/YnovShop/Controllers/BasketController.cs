@@ -63,6 +63,15 @@ namespace YnovShop.Controllers
             return Redirect("/Basket/Index");
         }
 
+        [HttpPost]
+        [Authorize]
+        public IActionResult ValideBasket()
+        {
+            this._basketService.ValideBasket(GetCurrentUser());
+
+            return Redirect("/Basket/Index");
+        }
+
         #endregion
     }
 }
