@@ -28,6 +28,9 @@ namespace YnovShop.Business
             if (string.IsNullOrEmpty(password))
                 throw new ArgumentNullException(nameof(password));
 
+            if (string.IsNullOrEmpty(email))
+                throw new ArgumentNullException(nameof(email));
+
             var salt = _saltProvider.GetSalt();
             var passwordHash = _passwordProvider.PasswordHash(password, salt);
 
