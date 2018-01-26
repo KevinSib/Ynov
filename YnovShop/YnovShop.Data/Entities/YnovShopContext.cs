@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace YnovShop.Data.Entities
 {
     public partial class YnovShopContext : DbContext
     {
+
         public virtual DbSet<YAddress> YAddress { get; set; }
         public virtual DbSet<YPhone> YPhone { get; set; }
         public virtual DbSet<YProduct> YProduct { get; set; }
@@ -21,6 +24,8 @@ namespace YnovShop.Data.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
+
             modelBuilder.Entity<YAddress>(entity =>
             {
                 entity.ToTable("Y_Address");
@@ -89,13 +94,15 @@ namespace YnovShop.Data.Entities
 
             modelBuilder.Entity<YProductPurchase>(entity =>
             {
-                entity.HasKey(e => new { e.IdYuser, e.IdYproduct });
-
                 entity.ToTable("Y_Product_Purchase");
 
-                entity.Property(e => e.IdYuser).HasColumnName("id_yuser");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.IdYproduct).HasColumnName("id_yproduct");
+
+                entity.Property(e => e.IdYuser).HasColumnName("id_yuser");
 
                 entity.Property(e => e.PurchaseDate)
                     .HasColumnName("purchaseDate")
@@ -118,12 +125,16 @@ namespace YnovShop.Data.Entities
             {
                 entity.ToTable("Y_User");
 
+                entity.HasIndex(e => e.Email)
+                    .HasName("UQ__Y_User__AB6E616410C1C9B6")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Email)
+                    .IsRequired()
                     .HasColumnName("email")
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.Firstname)
                     .HasColumnName("firstname")
@@ -154,16 +165,6 @@ namespace YnovShop.Data.Entities
                     .HasColumnName("salt")
                     .HasMaxLength(255)
                     .IsUnicode(false);
-
-                entity.HasOne(d => d.IdYaddressNavigation)
-                    .WithMany(p => p.YUser)
-                    .HasForeignKey(d => d.IdYaddress)
-                    .HasConstraintName("FK_yuseryaddress");
-
-                entity.HasOne(d => d.IdYphoneNavigation)
-                    .WithMany(p => p.YUser)
-                    .HasForeignKey(d => d.IdYphone)
-                    .HasConstraintName("FK_yuseryphone");
             });
         }
     }

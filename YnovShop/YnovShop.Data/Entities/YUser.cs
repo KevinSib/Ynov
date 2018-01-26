@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
 namespace YnovShop.Data.Entities
 {
     public partial class YUser
@@ -22,8 +21,6 @@ namespace YnovShop.Data.Entities
         public int? IdYaddress { get; set; }
         public int? IdYphone { get; set; }
 
-        public YAddress IdYaddressNavigation { get; set; }
-        public YPhone IdYphoneNavigation { get; set; }
         public ICollection<YProductPurchase> YProductPurchase { get; set; }
     }
 }
