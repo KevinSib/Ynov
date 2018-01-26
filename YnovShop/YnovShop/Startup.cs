@@ -31,6 +31,8 @@ namespace YnovShop
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IBasketRepository, BasketRepository>();
+            services.AddTransient<IBasketService, BasketService>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ISaltProvider, SaltProvider>();
@@ -47,7 +49,6 @@ namespace YnovShop
             }
             else
             {
-                app.UseDeveloperExceptionPage();
                 app.UseExceptionHandler("/Home/Error");
             }
 

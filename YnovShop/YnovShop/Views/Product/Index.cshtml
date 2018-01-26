@@ -20,7 +20,9 @@
                 </p>
                 <p>
                     <a class="btn btn-primary" asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">Voir</a>
-                    <a href="#" class="btn btn-default" role="button">Ajouter au panier</a>
+                    <form action="/Basket/AddToBasket/@product.Id" method="post">
+                        <input type="submit" value="Ajouter au panier" class="btn btn-default" />
+                    </form>
                 </p>
             </div>
          </div>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using YnovShop.Data.Entities;
 
@@ -8,6 +9,11 @@ namespace YnovShop.Data
     {
         public ProductRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
+        }
+
+        public IList<YProduct> GetAvailableProducts()
+        {
+            return this.Get(p => p.Stock > 0, null, 0, null).ToList();
         }
 
         public YProduct GetById(int id)

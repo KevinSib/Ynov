@@ -31,19 +31,22 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a id="nav-bar-home" asp-area="" asp-controller="Home" asp-action="Index">Accueil</a></li>
-                    @if (User.Identity.IsAuthenticated) 
-                    { 
+                    @if (User.Identity.IsAuthenticated)
+                    {
                         <li><a id="nav-bar-account" asp-area="" asp-controller="Account" asp-action="Details">Mon compte</a></li>
                         <li><a id="nav-bar-index" asp-area="" asp-controller="Product" asp-action="Index">Nos produits</a></li>
                     }
                     <li><a id="nav-bar-about" asp-area="" asp-controller="Home" asp-action="About">A Propos</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a id="nav-bar-logout" asp-area="" asp-controller="Account" asp-action="Logout">Déconnexion</a></li>
+                        <li><a asp-area="" asp-controller="Basket" asp-action="Index">Mon panier</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Logout">Déconnexion</a></li>
+
                     }
-                    else 
+                    else
                     {
                         <li><a id="nav-bar-connexion-account" asp-area="" asp-controller="Account" asp-action="Login">Se connecter</a></li>
                         <li><a id="nav-bar-create-account" asp-area="" asp-controller="Account" asp-action="Register">Créer un compte</a></li>
