@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace YnovShop.Data.Entities
 {
@@ -16,7 +14,8 @@ namespace YnovShop.Data.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Data Source = nsb.heavydev.fr; Initial Catalog = YnovShop; Persist Security Info=True;User ID = sa;Password=ynov2018ks;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer(@"Server=nsb.heavydev.fr;Database=YnovShop;User ID=sa;Password=ynov2018ks");
             }
         }
 
@@ -159,13 +158,11 @@ namespace YnovShop.Data.Entities
                 entity.HasOne(d => d.IdYaddressNavigation)
                     .WithMany(p => p.YUser)
                     .HasForeignKey(d => d.IdYaddress)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_yuseryaddress");
 
                 entity.HasOne(d => d.IdYphoneNavigation)
                     .WithMany(p => p.YUser)
                     .HasForeignKey(d => d.IdYphone)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_yuseryphone");
             });
         }

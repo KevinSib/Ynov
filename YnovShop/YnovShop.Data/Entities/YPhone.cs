@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace YnovShop.Data.Entities
 {
+    
     public partial class YPhone
     {
         public YPhone()

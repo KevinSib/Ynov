@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
+
 
 namespace YnovShop.Data.Entities
 {
@@ -19,8 +19,8 @@ namespace YnovShop.Data.Entities
         public string Salt { get; set; }
         public DateTime? Registration { get; set; }
         public bool? IsEnable { get; set; }
-        public int IdYaddress { get; set; }
-        public int IdYphone { get; set; }
+        public int? IdYaddress { get; set; }
+        public int? IdYphone { get; set; }
 
         public YAddress IdYaddressNavigation { get; set; }
         public YPhone IdYphoneNavigation { get; set; }
