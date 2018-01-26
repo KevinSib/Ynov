@@ -48,7 +48,7 @@ namespace YnovShopTest
         [TestMethod]
         public void SeeDetails()
         {
-            _webDriver.FindElement(By.Id("btn-seeDetails-3"));
+            _webDriver.FindElement(By.Id("btn-seeDetails-1"));
         }
     }
 }
