@@ -14,6 +14,7 @@ namespace YnovShopTest
         private Mock<ISaltProvider> _saltProvider;
         private Mock<IPasswordProvider> _passwordProvider;
         private IUserService userService;
+
         [TestInitialize]
         public void Init()
         {

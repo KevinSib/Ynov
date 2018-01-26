@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using YnovShop.Business;
 using YnovShop.Data;
+using YnovShop.Data.Entities;
 
 namespace YnovShopTest
 {
@@ -38,6 +39,14 @@ namespace YnovShopTest
         public void ReturnExceptionIfValideBasketAsNullParameter()
         {
             this._basketService.ValideBasket(null);
+        }
+
+        [TestMethod]
+        public void VerifyIfValideBasketIsSuccess()
+        {
+            this._basketRepository.Setup(s => s.Update(It.IsAny<YProductPurchase>()));
+            this._basketService.ValideBasket(new YnovShop.Data.Entities.YUser());
+            this._basketRepository.Verify(s => s.Update(It.IsAny<YProductPurchase>()));
         }
     }
 }
