@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[Y_Product_Purchase] (
-    [id_yuser]     INT      NOT NULL,
-    [id_yproduct]  INT      NOT NULL,
-    [purchaseDate] DATETIME NULL,
-    [id] INT NOT NULL, 
+    [id_yuser]		INT      NOT NULL,
+    [id_yproduct]	INT      NOT NULL,
+    [purchaseDate]	DATETIME NULL,
+    [id]			INT IDENTITY(1,	1)  NOT NULL, 
     CONSTRAINT [PK_userproduct] PRIMARY KEY CLUSTERED ([id]),
     CONSTRAINT [FK_userproductpurchase] FOREIGN KEY ([id_yuser]) REFERENCES [dbo].[Y_User] ([id]),
     CONSTRAINT [FK_productproductpurchase] FOREIGN KEY ([id_yproduct]) REFERENCES [dbo].[Y_Product] ([id])

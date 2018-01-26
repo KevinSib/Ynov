@@ -6,7 +6,7 @@ namespace YnovShop.Data.Entities
 {
     public partial class YnovShopContext : DbContext
     {
-
+       
         public virtual DbSet<YAddress> YAddress { get; set; }
         public virtual DbSet<YPhone> YPhone { get; set; }
         public virtual DbSet<YProduct> YProduct { get; set; }
@@ -24,7 +24,7 @@ namespace YnovShop.Data.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+           
 
             modelBuilder.Entity<YAddress>(entity =>
             {
@@ -96,9 +96,7 @@ namespace YnovShop.Data.Entities
             {
                 entity.ToTable("Y_Product_Purchase");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.IdYproduct).HasColumnName("id_yproduct");
 
