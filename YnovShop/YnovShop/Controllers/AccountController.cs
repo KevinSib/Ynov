@@ -14,22 +14,19 @@ using Microsoft.AspNetCore.Identity;
 
 namespace YnovShop.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         #region Variables
 
         private readonly IUserService _userService;
-        private readonly IUserRepository _userRepository;
 
         #endregion
 
         #region Constructors
 
-        public AccountController(IUserService userService, IUserRepository userRepository)
-
+        public AccountController(IUserService userService, IUserRepository userRepository) : base(userRepository)
         {
             this._userService = userService;
-            this._userRepository = userRepository;
         }
 
         #endregion
@@ -116,14 +113,11 @@ namespace YnovShop.Controllers
         [Authorize]
         public IActionResult Details()
         {
-            var userId  = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = this._userRepository.GetById(Int32.Parse(userId));
-
+            var user = GetCurrentUser();
             if (user == null)
             {
                 return NotFound();
             }
-
             return View(user);
         }
 

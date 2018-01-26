@@ -1,0 +1,19 @@
+﻿@model IEnumerable<YnovShop.Data.Entities.YProductPurchase>
+
+<h2>Votre panier</h2>
+
+<ul class="media-list">
+    @foreach (var purchase in Model) {
+        <li class="media">
+            <div class="media-left media-middle">
+                <a href="#">
+                    <img class="media-object" src="http://joygayler.com/wp-content/uploads/2014/03/Product_Chair.jpg" alt="...">
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">Middle aligned media</h4>
+                ...
+            </div>
+        </li>
+    }
+</ul>

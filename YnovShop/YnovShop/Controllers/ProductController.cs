@@ -38,9 +38,8 @@ namespace YnovShop.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            var products = this._productRepository.Get();
-            //UserRepository userRepository = new UserRepository(null);
-            //var user = userRepository.GetById(1);
+            var products = this._productRepository.GetAvailableProducts();
+
             return View(products);
         }
 

@@ -41,6 +41,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated) 
                     { 
+                        <li><a asp-area="" asp-controller="Basket" asp-action="Index">Mon panier</a></li>
                         <li><a asp-area="" asp-controller="Account" asp-action="Logout">Déconnexion</a></li>
                     }
                     else 
