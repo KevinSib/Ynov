@@ -18,6 +18,7 @@ namespace YnovShop.Business
             yproduct.Descritption = description;
             yproduct.Stock = stock;
             yproduct.Price = price;
+
             _productRepository.Insert(yproduct);
         }
        
