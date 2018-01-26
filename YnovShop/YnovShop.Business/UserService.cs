@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using YnovShop.Data;
 using YnovShop.Data.Entities;
 using YnovShop.Provider;
@@ -25,6 +28,9 @@ namespace YnovShop.Business
             if (string.IsNullOrEmpty(password))
                 throw new ArgumentNullException(nameof(password));
 
+            if (string.IsNullOrEmpty(email))
+                throw new ArgumentNullException(nameof(email));
+
             var salt = _saltProvider.GetSalt();
             var passwordHash = _passwordProvider.PasswordHash(password, salt);
 
@@ -40,6 +46,36 @@ namespace YnovShop.Business
             };
 
             _userRepository.Insert(user);
+        }
+
+        public LoginViewModel LoginUser(string email, string password)
+        {
+            if (string.IsNullOrEmpty(email))
+                throw new ArgumentNullException(nameof(email));
+
+            if (string.IsNullOrEmpty(password))
+                throw new ArgumentNullException(nameof(password));
+
+            YUser currentUser = this._userRepository.GetByEmail(email);
+            if (currentUser == null)
+            {
+                return new LoginViewModel() { Result = LoginResult.Failed };
+            }
+
+            string userSalt = currentUser.Salt;
+            string userPassword = currentUser.PasswordHash;
+
+            bool isValidate = this._passwordProvider.Validate(password, Convert.FromBase64String(userSalt), Convert.FromBase64String(userPassword));
+            if (isValidate)
+            {
+                return new LoginViewModel() 
+                { 
+                    User = currentUser,
+                    Result = LoginResult.Success 
+                };
+            }
+
+            return new LoginViewModel() { Result = LoginResult.Failed };
         }
     }
 }

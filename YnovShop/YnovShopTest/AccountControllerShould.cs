@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using YnovShop.Business;
+<<<<<<< HEAD
 using YnovShop.Controllers;
+=======
+>>>>>>> e74879f8c1c78fa5ef8a2ab0ab0ad7d12fbfdbba
 using YnovShop.Models;
 
 namespace YnovShopTest
@@ -34,11 +37,23 @@ namespace YnovShopTest
             // Arrange
             var model = new RegisterModel { Email = "Email" };
 
+<<<<<<< HEAD
             // Act
             var result = _controller.Register(model) as BadRequestObjectResult;
 
             // Arrange
             Assert.IsNotNull(result);
+=======
+
+
+
+            ////Act
+            //var result = _controller.Register_ReturnBadRequestIsModelNotValid();
+            //var result = _controller.Register(new RegisterModel);
+
+            ////Arrange
+            //var badRequestResult = Assert.IsNotNull(result);
+>>>>>>> e74879f8c1c78fa5ef8a2ab0ab0ad7d12fbfdbba
         }
 
 

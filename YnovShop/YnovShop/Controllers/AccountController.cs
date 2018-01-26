@@ -1,10 +1,17 @@
-﻿using System.Threading.Tasks;
+﻿﻿using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using YnovShop.Business;
 using YnovShop.Data;
 using YnovShop.Models;
+using YnovShop.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace YnovShop.Controllers
 {
@@ -14,22 +21,24 @@ namespace YnovShop.Controllers
 
         private readonly IUserService _userService;
         private readonly IUserRepository _userRepository;
-        private readonly ISignManager _signManager;
 
         #endregion
 
         #region Constructors
 
+<<<<<<< HEAD
         public AccountController(IUserService userService)
         {
             _userService = userService;
         }
 
         public AccountController(IUserService userService, IUserRepository userRepository, ISignManager signManager)
+=======
+        public AccountController(IUserService userService, IUserRepository userRepository)
+>>>>>>> e74879f8c1c78fa5ef8a2ab0ab0ad7d12fbfdbba
         {
             this._userService = userService;
             this._userRepository = userRepository;
-            this._signManager = signManager;
         }
 
         #endregion
@@ -49,9 +58,14 @@ namespace YnovShop.Controllers
             return View();
         }
 
+        // GET: Account/Register
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         // POST: Account/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
             try
@@ -60,7 +74,7 @@ namespace YnovShop.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
@@ -68,51 +82,57 @@ namespace YnovShop.Controllers
 
         //
         // POST: /Account/Login
+        [HttpPost]
         public async Task<IActionResult> Login(LoginModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var result = await this._signManager.SignInAsync(model.Email, model.Password);
-                /*if (result.Succeeded)
+                LoginViewModel result = this._userService.LoginUser(model.Email, model.Password);
+                if (result.Result == LoginResult.Success && result.User != null)
                 {
-                    return RedirectToLocal(returnUrl);
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, model.Email),
+                        new Claim(ClaimTypes.NameIdentifier, result.User.Id.ToString())
+                    };
+
+                    var userIdentity = new ClaimsIdentity(claims, "login");
+
+                    ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+
+                    await HttpContext.SignInAsync(principal);
+
+                    return Redirect("/");
                 }
-                if (result.IsLockedOut)
+                else 
                 {
-                    return View("Lockout");
+                    ViewData["ERROR"] = "Can't connect user !!!";
                 }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
-                }*/
             }
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOut
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogOut()
+        [Authorize]
+        public async Task<IActionResult> Logout()
         {
-            await this._signManager.SignOutAsync();
-            return View();
+            await HttpContext.SignOutAsync();
+
+            return Redirect("/");
         }
 
-        // GET: Users/Details/5
-        public IActionResult Details(int? id)
+        // GET: Users/Details
+        [Authorize]
+        public IActionResult Details()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var user = this._userRepository.GetById((int)id);
+            var userId  = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = this._userRepository.GetById(Int32.Parse(userId));
+
             if (user == null)
             {
                 return NotFound();
             }
+
             return View(user);
         }
 
