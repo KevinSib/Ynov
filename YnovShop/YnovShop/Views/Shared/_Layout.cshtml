@@ -42,7 +42,7 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a asp-area="" asp-controller="Basket" asp-action="Index">Mon panier</a></li>
+                        <li><a id="nav-bar-basket" asp-area="" asp-controller="Basket" asp-action="Index">Mon panier</a></li>
                         <li><a asp-area="" asp-controller="Account" asp-action="Logout">Déconnexion</a></li>
 
                     }

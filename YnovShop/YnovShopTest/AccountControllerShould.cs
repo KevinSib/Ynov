@@ -41,7 +41,6 @@ namespace YnovShopTest
             Assert.IsNotNull(result);
 
 
-
             ////Act
             //var result = _controller.Register_ReturnBadRequestIsModelNotValid();
             //var result = _controller.Register(new RegisterModel);
