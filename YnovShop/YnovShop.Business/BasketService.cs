@@ -30,24 +30,18 @@ namespace YnovShop.Business
             this._basketRepository.Insert(productPurchase);
         }
 
-        public void ValideBasket(YUser user, YProduct product)
+        public void ValideBasket(YUser user)
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
-            if (product == null)
-                throw new ArgumentNullException(nameof(product));
-
-            var basket = this._basketRepository.GetBasketForUserAndProduct(user, product);
-
-            if (basket != null)
+            var products = this._basketRepository.GetActiveBasketForUser(user);
+            foreach (var product in products) 
             {
-                basket.PurchaseDate = DateTime.Now;
+                product.PurchaseDate = DateTime.Now;
 
-                this._basketRepository.Update(basket);
+                this._basketRepository.Update(product);
             }
-
-            throw new ArgumentNullException(nameof(basket));
         }
     }
 }
