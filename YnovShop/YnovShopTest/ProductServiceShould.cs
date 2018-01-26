@@ -42,9 +42,23 @@ namespace YnovShopTest
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
+        public void ReturnExceptionIfStockIsLessThan0()
+        {
+            this._productService.CreateProduct("Nom", "Description", -3, 100);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
         public void ReturnExceptionIfPriceIsEqualTo0()
         {
             this._productService.CreateProduct("Nom", "Description", 100, 0);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void ReturnExceptionIfPriceIsLessThan0()
+        {
+            this._productService.CreateProduct("Nom", "Description", 100, -12);
         }
     }
 }

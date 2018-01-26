@@ -18,5 +18,26 @@ namespace YnovShopTest
             this._basketRepository = new Mock<IBasketRepository>(MockBehavior.Strict);
             this._basketService = new BasketService(_basketRepository.Object);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReturnExceptionIfUserIsNull()
+        {
+            this._basketService.AddProductToBasket(null, new YnovShop.Data.Entities.YProduct());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReturnExceptionIfProductIsNull()
+        {
+            this._basketService.AddProductToBasket(new YnovShop.Data.Entities.YUser(), null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ReturnExceptionIfValideBasketAsNullParameter()
+        {
+            this._basketService.ValideBasket(null);
+        }
     }
 }
