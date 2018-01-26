@@ -93,5 +93,25 @@ namespace YnovShopTest
 
             _webDriver.FindElement(By.Id("nav-bar-logout")).Click();
         }
+
+        [TestMethod]
+        public void Account()
+        {
+
+            YUser yuser = _repository.GetByEmail("test.Selenium@gmail.com");
+            if (yuser == null)
+                _userService.CreateUser("SeleniumFirstname", "SeleniumLastname", "test.Selenium@gmail.com", "Selenium");
+
+
+            _webDriver.Navigate().GoToUrl("http://localhost:50295");
+            _webDriver.FindElement(By.Id("nav-bar-connexion-account")).Click();
+
+            _webDriver.FindElement(By.Id("login-Email")).SendKeys("test.Selenium@gmail.com");
+            _webDriver.FindElement(By.Id("login-password")).SendKeys("Selenium");
+
+            _webDriver.FindElement(By.Id("submit-login")).Submit();
+
+            _webDriver.FindElement(By.Id("nav-bar-account")).Click();
+        }
     }
 }
