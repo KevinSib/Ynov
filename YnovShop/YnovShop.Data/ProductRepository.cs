@@ -13,7 +13,7 @@ namespace YnovShop.Data
 
         public IList<YProduct> GetAvailableProducts()
         {
-            return this.Get(p => p.Stock > 0, null, 0, 1).ToList();
+            return this.Get(p => p.Stock > 0, null, 0, null).ToList();
         }
 
         public YProduct GetById(int id)
