@@ -18,7 +18,10 @@
                     <br />
                     <small>Il reste @product.Stock produits</small>
                 </p>
-                <p><a href="#" class="btn btn-primary" role="button">Voir</a> <a href="#" class="btn btn-default" role="button">Ajouter au panier</a></p>
+                <p>
+                    <a class="btn btn-primary" asp-controller="Product" asp-action="Details" asp-route-id="@product.Id">Voir</a>
+                    <a href="#" class="btn btn-default" role="button">Ajouter au panier</a>
+                </p>
             </div>
          </div>
         
