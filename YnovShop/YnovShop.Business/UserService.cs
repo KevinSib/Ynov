@@ -45,7 +45,7 @@ namespace YnovShop.Business
             _userRepository.Insert(user);
         }
 
-        public LoginResult LoginUser(string email, string password)
+        public LoginViewModel LoginUser(string email, string password)
         {
             if (string.IsNullOrEmpty(email))
                 throw new ArgumentNullException(nameof(email));
@@ -56,7 +56,7 @@ namespace YnovShop.Business
             YUser currentUser = this._userRepository.GetByEmail(email);
             if (currentUser == null)
             {
-                return LoginResult.NotExists;
+                return new LoginViewModel() { Result = LoginResult.Failed };
             }
 
             string userSalt = currentUser.Salt;
@@ -65,10 +65,14 @@ namespace YnovShop.Business
             bool isValidate = this._passwordProvider.Validate(password, Convert.FromBase64String(userSalt), Convert.FromBase64String(userPassword));
             if (isValidate)
             {
-                return LoginResult.Success;
+                return new LoginViewModel() 
+                { 
+                    User = currentUser,
+                    Result = LoginResult.Success 
+                };
             }
 
-            return LoginResult.Failed;
+            return new LoginViewModel() { Result = LoginResult.Failed };
         }
     }
 }
