@@ -23,8 +23,8 @@ namespace YnovShop.Business
 
             YProductPurchase productPurchase = new YProductPurchase()
             {
-                IdYuserNavigation = user,
-                IdYproductNavigation = product
+                IdYuser = user.Id,
+                IdYproduct = product.Id
             };
 
             this._basketRepository.Insert(productPurchase);

@@ -49,7 +49,6 @@ namespace YnovShop
             }
             else
             {
-                app.UseDeveloperExceptionPage();
                 app.UseExceptionHandler("/Home/Error");
             }
 

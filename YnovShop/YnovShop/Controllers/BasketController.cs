@@ -50,11 +50,11 @@ namespace YnovShop.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddToBasket(int? productId)
+        public IActionResult AddToBasket(int? id)
         {
-            if (productId != null)
+            if (id != null)
             {
-                YProduct product = this._productRepository.GetById((int)productId);
+                YProduct product = this._productRepository.GetById((int)id);
                 if (product != null)
                 {
                     this._basketService.AddProductToBasket(GetCurrentUser(), product);
