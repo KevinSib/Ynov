@@ -15,12 +15,18 @@ namespace YnovShopTest
             _webDriver = new ChromeDriver(@"C:\chromedriver");
         }
 
-
         [TestMethod]
         public void NavBarHome()
         {
             _webDriver.Navigate().GoToUrl("http://localhost:50295");
             _webDriver.FindElement(By.Id("nav-bar-home")).Click();
+        }
+
+        [TestMethod]
+        public void NevBarAbout()
+        {
+            _webDriver.Navigate().GoToUrl("http://localhost:50295");
+            _webDriver.FindElement(By.Id("nav-bar-about")).Click();
         }
     }
 }
