@@ -5,10 +5,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using YnovShop.Business;
-<<<<<<< HEAD
 using YnovShop.Controllers;
-=======
->>>>>>> e74879f8c1c78fa5ef8a2ab0ab0ad7d12fbfdbba
 using YnovShop.Models;
 
 namespace YnovShopTest
@@ -27,7 +24,7 @@ namespace YnovShopTest
             var httpContext = new DefaultHttpContext();
             var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
 
-            _controller = new AccountController(_userServiceMock.Object);
+            //_controller = new AccountController(_userServiceMock.Object);
             _controller.ModelState.AddModelError("SessionName", "Required");
         }
 
@@ -37,13 +34,11 @@ namespace YnovShopTest
             // Arrange
             var model = new RegisterModel { Email = "Email" };
 
-<<<<<<< HEAD
             // Act
             var result = _controller.Register(model) as BadRequestObjectResult;
 
             // Arrange
             Assert.IsNotNull(result);
-=======
 
 
 
@@ -53,7 +48,7 @@ namespace YnovShopTest
 
             ////Arrange
             //var badRequestResult = Assert.IsNotNull(result);
->>>>>>> e74879f8c1c78fa5ef8a2ab0ab0ad7d12fbfdbba
+
         }
 
 

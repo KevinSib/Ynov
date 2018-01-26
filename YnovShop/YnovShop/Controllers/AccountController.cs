@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using YnovShop.Business;
 using YnovShop.Data;
@@ -26,16 +25,8 @@ namespace YnovShop.Controllers
 
         #region Constructors
 
-<<<<<<< HEAD
-        public AccountController(IUserService userService)
-        {
-            _userService = userService;
-        }
-
-        public AccountController(IUserService userService, IUserRepository userRepository, ISignManager signManager)
-=======
         public AccountController(IUserService userService, IUserRepository userRepository)
->>>>>>> e74879f8c1c78fa5ef8a2ab0ab0ad7d12fbfdbba
+
         {
             this._userService = userService;
             this._userRepository = userRepository;
