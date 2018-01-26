@@ -1,10 +1,10 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
- using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using YnovShop.Business;
 using YnovShop.Data;
 using YnovShop.Models;
@@ -23,6 +23,7 @@ namespace YnovShop.Controllers
         #region Constructors
 
         public AccountController(IUserService userService, IUserRepository userRepository)
+
         {
             this._userService = userService;
             this._userRepository = userRepository;
@@ -92,7 +93,7 @@ namespace YnovShop.Controllers
 
                     return Redirect("/");
                 }
-                else 
+                else
                 {
                     ViewData["ERROR"] = "Can't connect user !!!";
                 }
@@ -112,7 +113,7 @@ namespace YnovShop.Controllers
         [Authorize]
         public IActionResult Details()
         {
-            var userId  = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = this._userRepository.GetById(Int32.Parse(userId));
 
             if (user == null)
