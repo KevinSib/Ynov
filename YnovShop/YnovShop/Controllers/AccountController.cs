@@ -1,16 +1,13 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YnovShop.Business;
 using YnovShop.Data;
 using YnovShop.Models;
-using YnovShop.Data.Entities;
-using Microsoft.AspNetCore.Identity;
 
 namespace YnovShop.Controllers
 {
@@ -93,7 +90,7 @@ namespace YnovShop.Controllers
 
                     return Redirect("/");
                 }
-                else 
+                else
                 {
                     ViewData["ERROR"] = "Can't connect user !!!";
                 }

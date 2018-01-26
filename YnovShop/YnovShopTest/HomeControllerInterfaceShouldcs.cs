@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YnovShopTest
+﻿namespace YnovShopTest
 {
     public class HomeControllerInterfaceShouldcs
     {
