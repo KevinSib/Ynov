@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using YnovShop.Business;
 using YnovShop.Data;
 using YnovShop.Models;
+using YnovShop.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace YnovShop.Controllers
 {
@@ -77,12 +79,13 @@ namespace YnovShop.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                LoginResult loginResult = this._userService.LoginUser(model.Email, model.Password);
-                if (loginResult == LoginResult.Success)
+                LoginViewModel result = this._userService.LoginUser(model.Email, model.Password);
+                if (result.Result == LoginResult.Success && result.User != null)
                 {
                     var claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.Name, model.Email)
+                        new Claim(ClaimTypes.Name, model.Email),
+                        new Claim(ClaimTypes.NameIdentifier, result.User.Id.ToString())
                     };
 
                     var userIdentity = new ClaimsIdentity(claims, "login");
@@ -106,21 +109,21 @@ namespace YnovShop.Controllers
         {
             await HttpContext.SignOutAsync();
 
-            return View();
+            return Redirect("/");
         }
 
-        // GET: Users/Details/5
-        public IActionResult Details(int? id)
+        // GET: Users/Details
+        [Authorize]
+        public IActionResult Details()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var user = this._userRepository.GetById((int)id);
+            var userId  = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = this._userRepository.GetById(Int32.Parse(userId));
+
             if (user == null)
             {
                 return NotFound();
             }
+
             return View(user);
         }
 
