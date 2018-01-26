@@ -20,6 +20,11 @@ namespace YnovShop.Controllers
 
         #region Constructors
 
+        public AccountController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         public AccountController(IUserService userService, IUserRepository userRepository, ISignManager signManager)
         {
             this._userService = userService;
