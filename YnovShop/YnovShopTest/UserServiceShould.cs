@@ -17,14 +17,11 @@ namespace YnovShopTest
         [TestInitialize]
         public void Init()
         {
-            //test crub bdd ? 
-            //injection dependance dans les tests ?
-            //tester si il envoye une exception
 
-            _userRepository=new Mock<IUserRepository>(MockBehavior.Strict);
+            _userRepository = new Mock<IUserRepository>(MockBehavior.Strict);
             _saltProvider = new Mock<ISaltProvider>(MockBehavior.Strict);
             _passwordProvider = new Mock<IPasswordProvider>(MockBehavior.Strict);
-            userService = new UserService(_userRepository.Object,_saltProvider.Object,_passwordProvider.Object);
+            userService = new UserService(_userRepository.Object, _saltProvider.Object, _passwordProvider.Object);
         }
 
         [TestMethod]

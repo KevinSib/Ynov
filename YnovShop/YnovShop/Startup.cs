@@ -1,13 +1,10 @@
-﻿using System;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using YnovShop.Business;
 using YnovShop.Data;
-using YnovShop.Data.Entities;
 using YnovShop.Provider;
 
 namespace YnovShop
