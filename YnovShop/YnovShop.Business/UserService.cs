@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using YnovShop.Business.Exceptions;
 using YnovShop.Data;
 using YnovShop.Data.Entities;
 using YnovShop.Provider;
@@ -26,10 +27,10 @@ namespace YnovShop.Business
         public void CreateUser(string firstname, string lastname, string email, string password)
         {
             if (string.IsNullOrEmpty(password))
-                throw new ArgumentNullException(nameof(password));
+                throw new NoPasswordProvidedException();
 
             if (string.IsNullOrEmpty(email))
-                throw new ArgumentNullException(nameof(email));
+                throw new NoEmailProvidedException();
 
             var salt = _saltProvider.GetSalt();
             var passwordHash = _passwordProvider.PasswordHash(password, salt);
@@ -51,10 +52,10 @@ namespace YnovShop.Business
         public LoginViewModel LoginUser(string email, string password)
         {
             if (string.IsNullOrEmpty(email))
-                throw new ArgumentNullException(nameof(email));
+                throw new NoEmailProvidedException();
 
             if (string.IsNullOrEmpty(password))
-                throw new ArgumentNullException(nameof(password));
+                throw new NoPasswordProvidedException();
 
             YUser currentUser = this._userRepository.GetByEmail(email);
             if (currentUser == null)

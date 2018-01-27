@@ -1,4 +1,5 @@
 ﻿using System;
+using YnovShop.Business.Exceptions;
 using YnovShop.Data;
 using YnovShop.Data.Entities;
 
@@ -33,7 +34,7 @@ namespace YnovShop.Business
         public void ValideBasket(YUser user)
         {
             if (user == null)
-                throw new ArgumentNullException(nameof(user));
+                throw new NoUserProvidedException();
 
             var products = this._basketRepository.GetActiveBasketForUser(user);
             foreach (var product in products) 

@@ -1,4 +1,5 @@
 ﻿using System;
+using YnovShop.Business.Exceptions;
 using YnovShop.Data;
 using YnovShop.Data.Entities;
 
@@ -15,16 +16,16 @@ namespace YnovShop.Business
         public void CreateProduct(string name, string description, int stock, double price)
         {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentNullException(nameof(name));
+                throw new NoNameProvidedException();
 
             if (string.IsNullOrEmpty(description))
-                throw new ArgumentNullException(nameof(description));
+                throw new NoDescriptionProvidedException();
 
             if (stock <= 0)
-                throw new Exception("Stock must be higher than 0");
+                throw new StockIsEqualOrLessThanZeroException();
 
             if (price <= 0)
-                throw new Exception("Price must be higher than 0");
+                throw new PriceIsEqualOrLessThanZeroException();
                 
             YProduct yproduct = new YProduct();
             yproduct.Name = name;

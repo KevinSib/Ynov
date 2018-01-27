@@ -9,4 +9,7 @@
     <ProjectReference Include="..\YnovShop.Provider\YnovShop.Provider.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
 </Project>

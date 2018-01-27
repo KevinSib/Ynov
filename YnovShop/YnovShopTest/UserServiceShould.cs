@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using YnovShop.Business;
+using YnovShop.Business.Exceptions;
 using YnovShop.Data;
 using YnovShop.Provider;
 
@@ -26,28 +27,28 @@ namespace YnovShopTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NoPasswordProvidedException))]
         public void returnExceptionIfPasswordIsEmpty()
         {
             userService.CreateUser("", "", "", "");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NoPasswordProvidedException))]
         public void returnExceptionIfPasswordIsNull()
         {
             userService.CreateUser("", "", "", null);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NoEmailProvidedException))]
         public void returnExceptionIfEmailsNull()
         {
             userService.CreateUser("", "", null, "erer");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(NoEmailProvidedException))]
         public void returnExceptionIfEmailIsEmpty()
         {
             userService.CreateUser("", "", "", "rer");

@@ -9,7 +9,7 @@ namespace YnovShopTest
         private IPasswordProvider passwordProvider;
         private ISaltProvider saltProvider;
 
-    [TestInitialize]
+        [TestInitialize]
         public void Init()
         {
             passwordProvider = new PasswordProvider();
