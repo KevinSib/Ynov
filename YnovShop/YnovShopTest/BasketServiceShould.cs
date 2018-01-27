@@ -45,7 +45,7 @@ namespace YnovShopTest
         }
 
         [TestMethod]
-        public void VerifyIfValideBasketIsSuccess2()
+        public void VerifyIfValideBasketIsSuccess()
         {
            IList<YProductPurchase> list = new List<YProductPurchase>();
             list.Add(new YProductPurchase() );
@@ -54,6 +54,14 @@ namespace YnovShopTest
             this._basketService.ValideBasket(new YUser());
             this._basketRepository.Verify(s => s.GetActiveBasketForUser(It.IsAny<YUser>()));
             this._basketRepository.Verify(s => s.Update(It.IsAny<YProductPurchase>()));
+        }
+
+        [TestMethod]
+        public void VerifyIfAddProductToBasketIsSuccess()
+        {
+            this._basketRepository.Setup(s => s.Insert(It.IsAny<YProductPurchase>()));
+            this._basketService.AddProductToBasket(new YUser(), new YProduct());
+            this._basketRepository.Verify(s => s.Insert(It.IsAny<YProductPurchase>()));
         }
     }
 }
