@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using YnovShop.Business;
@@ -25,14 +27,14 @@ namespace YnovShopTest
         [ExpectedException(typeof(NoUserProvidedException))]
         public void ReturnExceptionIfUserIsNull()
         {
-            this._basketService.AddProductToBasket(null, new YnovShop.Data.Entities.YProduct());
+            this._basketService.AddProductToBasket(null, new YProduct());
         }
 
         [TestMethod]
         [ExpectedException(typeof(NoProductProvidedException))]
         public void ReturnExceptionIfProductIsNull()
         {
-            this._basketService.AddProductToBasket(new YnovShop.Data.Entities.YUser(), null);
+            this._basketService.AddProductToBasket(new YUser(), null);
         }
 
         [TestMethod]
@@ -43,10 +45,14 @@ namespace YnovShopTest
         }
 
         [TestMethod]
-        public void VerifyIfValideBasketIsSuccess()
+        public void VerifyIfValideBasketIsSuccess2()
         {
+           IList<YProductPurchase> list = new List<YProductPurchase>();
+            list.Add(new YProductPurchase() );
             this._basketRepository.Setup(s => s.Update(It.IsAny<YProductPurchase>()));
-            this._basketService.ValideBasket(new YnovShop.Data.Entities.YUser());
+            this._basketRepository.Setup(s => s.GetActiveBasketForUser(It.IsAny<YUser>())).Returns(list);
+            this._basketService.ValideBasket(new YUser());
+            this._basketRepository.Verify(s => s.GetActiveBasketForUser(It.IsAny<YUser>()));
             this._basketRepository.Verify(s => s.Update(It.IsAny<YProductPurchase>()));
         }
     }

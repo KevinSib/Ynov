@@ -17,10 +17,10 @@ namespace YnovShop.Business
         public void AddProductToBasket(YUser user, YProduct product)
         {
             if (user == null)
-                throw new ArgumentNullException(nameof(user));
+                throw new NoUserProvidedException();
 
             if (product == null)
-                throw new ArgumentNullException(nameof(product));
+                throw new NoProductProvidedException();
 
             YProductPurchase productPurchase = new YProductPurchase()
             {
