@@ -4,6 +4,7 @@ using Moq;
 using YnovShop.Business;
 using YnovShop.Business.Exceptions;
 using YnovShop.Data;
+using YnovShop.Data.Entities;
 
 namespace YnovShopTest
 {
@@ -60,6 +61,14 @@ namespace YnovShopTest
         public void ReturnExceptionIfPriceIsLessThan0()
         {
             this._productService.CreateProduct("Nom", "Description", 100, -12);
+        }
+
+        [TestMethod]
+        public void VerifyIfCreateProductIsSuccess()
+        {
+            this._productRepository.Setup(s => s.Insert(It.IsAny<YProduct>()));
+            this._productService.CreateProduct("testname","testdescription",1,10.5);
+            this._productRepository.Verify(s => s.Insert(It.IsAny<YProduct>()));
         }
     }
 }
